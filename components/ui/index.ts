@@ -1,0 +1,6 @@
+// Barrel export — importe de '@/components/ui'
+export { Button }        from './Button'
+export { Card }          from './Card'
+export { Badge, statusToBadge, scoreToVariant } from './Badge'
+export { ScoreRing }     from './ScoreRing'
+export { DimensionBar }  from './DimensionBar'

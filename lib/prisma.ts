@@ -1,0 +1,25 @@
+import { PrismaClient } from '@prisma/client'
+import { PrismaPg } from '@prisma/adapter-pg'
+import { Pool } from 'pg'
+
+declare global {
+  // eslint-disable-next-line no-var
+  var _prisma: PrismaClient | undefined
+}
+
+function createPrismaClient(): PrismaClient {
+  if (!process.env.DATABASE_URL) {
+    // Sem banco configurado: retorna client sem adapter (erros serão tratados nas rotas)
+    return new PrismaClient()
+  }
+  const pool    = new Pool({ connectionString: process.env.DATABASE_URL })
+  const adapter = new PrismaPg(pool)
+  return new PrismaClient({ adapter } as any)
+}
+
+export const prisma: PrismaClient =
+  globalThis._prisma ?? createPrismaClient()
+
+if (process.env.NODE_ENV !== 'production') {
+  globalThis._prisma = prisma
+}
