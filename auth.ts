@@ -1,29 +1,19 @@
 import NextAuth from 'next-auth'
 import Google from 'next-auth/providers/google'
 import Credentials from 'next-auth/providers/credentials'
-import { PrismaAdapter } from '@auth/prisma-adapter'
 import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs'
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(prisma) as any,
+  // Sem PrismaAdapter — gerenciamos usuários manualmente no callback
   providers: [
-    // Google — ativo quando as chaves estiverem no ambiente
     ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
       ? [Google({
           clientId:     process.env.GOOGLE_CLIENT_ID,
           clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-          authorization: {
-            params: {
-              prompt: 'consent',
-              access_type: 'offline',
-              response_type: 'code',
-            },
-          },
         })]
       : []),
 
-    // E-mail + senha
     Credentials({
       name: 'credentials',
       credentials: {
@@ -47,13 +37,44 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
+
   session: { strategy: 'jwt' },
-  pages: { signIn: '/login', newUser: '/welcome' },
+  pages:   { signIn: '/login', newUser: '/welcome' },
+
   callbacks: {
+    async signIn({ user, account }) {
+      // Para OAuth (Google), cria o usuário no banco se não existir
+      if (account?.provider === 'google' && user.email) {
+        try {
+          const exists = await prisma.user.findUnique({ where: { email: user.email } })
+          if (!exists) {
+            await prisma.user.create({
+              data: {
+                email: user.email,
+                name:  user.name ?? '',
+                image: user.image ?? '',
+              },
+            })
+          }
+        } catch {
+          // Falha silenciosa — usuário ainda entra via JWT
+        }
+      }
+      return true
+    },
+
     async jwt({ token, user }) {
       if (user?.id) token.id = user.id
+      // Para OAuth, busca o ID do banco
+      if (!token.id && token.email) {
+        try {
+          const dbUser = await prisma.user.findUnique({ where: { email: token.email as string } })
+          if (dbUser) token.id = dbUser.id
+        } catch { /* sem DB disponível */ }
+      }
       return token
     },
+
     async session({ session, token }) {
       if (token.id) session.user.id = token.id as string
       return session
