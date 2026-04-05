@@ -33,20 +33,20 @@ export default function LandingPage() {
 
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs mono mb-8"
           style={{ background: 'rgba(255,77,48,0.10)', border: '0.5px solid rgba(255,77,48,0.25)', color: '#FF4D30' }}>
-          ⚠ 1.000 casos de falhas reais documentados
+          ⚠ Mais de 1.000 casos reais documentados
         </div>
 
         <h1 className="font-bold mb-6 mx-auto"
           style={{ fontSize: 'clamp(32px,5vw,58px)', letterSpacing: '-0.03em', lineHeight: 1.1, maxWidth: 720 }}>
-          Descubra onde sua startup<br />
-          <span style={{ color: '#FFFD02' }}>vai falhar</span>
-          <span style={{ color: 'rgba(244,244,240,0.35)' }}> — antes de falhar.</span>
+          Descubra onde sua ideia<br />
+          <span style={{ color: '#FFFD02' }}>precisa ser validada</span>
+          <span style={{ color: 'rgba(244,244,240,0.35)' }}> — antes de investir.</span>
         </h1>
 
-        <p className="text-base leading-relaxed mb-10 mx-auto"
+        <p className="text-base leading-relaxed mb-4 mx-auto"
           style={{ color: 'rgba(244,244,240,0.55)', maxWidth: 520 }}>
-          Diagnóstico honesto em 8 dimensões, baseado nos padrões que antecederam{' '}
-          <strong style={{ color: '#F4F4F0' }}>$140B+ em capital destruído</strong>.
+          Diagnóstico em 8 dimensões com base em mais de{' '}
+          <strong style={{ color: '#F4F4F0' }}>1.000 casos reais</strong>.
           Sem eufemismos. Sem coach.
         </p>
 
@@ -54,7 +54,7 @@ export default function LandingPage() {
           <Link href="/pre-check"
             className="flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm transition-all hover:opacity-90 volt-glow"
             style={{ background: '#FFFD02', color: '#0F0F0F', minWidth: 240 }}>
-            Pré-diagnóstico em 2 min →
+            Analise agora a minha ideia →
           </Link>
           <Link href="/login"
             className="flex items-center gap-2 px-8 py-4 rounded-xl font-medium text-sm transition-all hover:opacity-80 glass">
@@ -65,10 +65,10 @@ export default function LandingPage() {
         {/* Stats */}
         <div className="flex items-center justify-center gap-8 flex-wrap">
           {[
-            { v: '1.000+', l: 'casos documentados' },
-            { v: '$140B+', l: 'capital destruído' },
-            { v: '8', l: 'dimensões avaliadas' },
-            { v: '2 min', l: 'para o primeiro sinal' },
+            { v: '1.000+', l: 'casos reais analisados' },
+            { v: '$140B+', l: 'capital estudado' },
+            { v: '8',      l: 'dimensões avaliadas' },
+            { v: '2 min',  l: 'para o primeiro resultado' },
           ].map(s => (
             <div key={s.v} className="text-center">
               <p className="mono font-bold text-lg" style={{ color: '#FFFD02' }}>{s.v}</p>
@@ -82,9 +82,9 @@ export default function LandingPage() {
       <section className="max-w-4xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-3 gap-5">
           {[
-            { icon: '📚', color: '#FF4D30', title: 'Banco de 1.000 falhas', items: ['Casos reais documentados', 'Filtros por dimensão e setor', 'Lições de cada falha', '$140B+ analisados'] },
-            { icon: '🎯', color: '#FFFD02', title: 'Score em 8 dimensões', items: ['Problema · Mercado · Solução', 'Diferenciação · Tração · Time', 'Modelo · Validação', 'Benchmark vs. critérios de VCs'] },
-            { icon: '⚡', color: '#4ADE80', title: 'Plano de ação', items: ['Parecer com GPT-4o', 'Missões priorizadas', 'Card compartilhável', 'Email com resumo'] },
+            { icon: '📚', color: '#FF4D30', title: 'Banco de 1.000 casos reais', items: ['Casos documentados com metodologia própria', 'Filtros por dimensão e setor', 'Padrões identificados em cada caso', '$140B+ em capital estudado'] },
+            { icon: '🎯', color: '#FFFD02', title: 'Diagnóstico em 8 dimensões', items: ['Problema · Mercado · Solução', 'Diferenciação · Tração · Time', 'Modelo · Validação', 'Benchmark baseado em dados reais'] },
+            { icon: '⚡', color: '#4ADE80', title: 'Plano de ação personalizado', items: ['Modelo de IA treinado', 'Missões priorizadas por risco', 'Card compartilhável', 'Resumo por e-mail'] },
           ].map(f => (
             <div key={f.title} className="rounded-2xl p-6 glass relative overflow-hidden">
               <div className="absolute top-0 left-0 right-0 h-px"
@@ -107,15 +107,18 @@ export default function LandingPage() {
       {/* CTA Final */}
       <section className="max-w-4xl mx-auto px-6 py-16 text-center">
         <h2 className="font-bold mb-4" style={{ fontSize: 'clamp(22px,3vw,36px)', letterSpacing: '-0.02em' }}>
-          Pronto para saber a verdade?
+          Pronto para validar sua ideia com dados reais?
         </h2>
-        <p className="text-sm mb-8" style={{ color: 'rgba(244,244,240,0.5)' }}>
+        <p className="text-sm mb-2" style={{ color: 'rgba(244,244,240,0.5)' }}>
           2 minutos. Sem cadastro. Resultado imediato.
+        </p>
+        <p className="text-xs mb-8" style={{ color: 'rgba(244,244,240,0.3)' }}>
+          Baseado em +1.000 casos reais analisados com metodologia própria de validação de startups
         </p>
         <Link href="/pre-check"
           className="inline-flex items-center gap-2 px-10 py-4 rounded-xl font-bold text-sm volt-glow hover:opacity-90 transition-all"
           style={{ background: '#FFFD02', color: '#0F0F0F' }}>
-          Ver o sinal da minha startup →
+          Analise agora a minha ideia →
         </Link>
       </section>
 
@@ -126,8 +129,8 @@ export default function LandingPage() {
             <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.06em' }}>VALLI</span>
             <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.06em', color: '#FFFD02' }}>DATOR</span>
           </div>
-          <p className="text-[11px]" style={{ color: 'rgba(244,244,240,0.3)' }}>
-            Diagnóstico baseado em 1.000 casos reais · Sem eufemismos
+          <p className="text-[11px] text-center" style={{ color: 'rgba(244,244,240,0.3)' }}>
+            Baseado em +1.000 casos reais analisados com metodologia própria de validação de startups
           </p>
           <div className="flex gap-4 text-[11px]" style={{ color: 'rgba(244,244,240,0.35)' }}>
             <Link href="/pre-check" className="hover:opacity-80">Pré-diagnóstico</Link>
