@@ -1,22 +1,11 @@
 {
-  "framework": "nextjs",
   "buildCommand": "npx prisma generate && next build",
-  "outputDirectory": ".next",
   "installCommand": "npm install",
+  "framework": "nextjs",
+  "outputDirectory": ".next",
   "regions": [
     "gru1"
   ],
-  "env": {
-    "DATABASE_URL": "@vallidator-database-url",
-    "NEXTAUTH_SECRET": "@vallidator-nextauth-secret",
-    "NEXTAUTH_URL": "@vallidator-nextauth-url",
-    "OPENAI_API_KEY": "@vallidator-openai-key",
-    "RESEND_API_KEY": "@vallidator-resend-key",
-    "STRIPE_SECRET_KEY": "@vallidator-stripe-secret",
-    "STRIPE_WEBHOOK_SECRET": "@vallidator-stripe-webhook",
-    "GITHUB_ID": "@vallidator-github-id",
-    "GITHUB_SECRET": "@vallidator-github-secret"
-  },
   "headers": [
     {
       "source": "/api/(.*)",
