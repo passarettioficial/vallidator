@@ -45,9 +45,10 @@ export default function LoginPage() {
     }
   }
 
-  async function handleOAuth(provider: string) {
+  function handleOAuth(provider: string) {
     setOauth(provider)
-    await signIn(provider, { callbackUrl: '/dashboard' })
+    // Navegação direta — mais confiável que signIn() client-side
+    window.location.href = `/api/auth/signin/${provider}?callbackUrl=${encodeURIComponent('https://vallidator.com.br/dashboard')}`
   }
 
   return (
